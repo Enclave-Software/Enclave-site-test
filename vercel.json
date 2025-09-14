@@ -26,10 +26,5 @@
   ],
   "env": {
     "SECRET_KEY": "@secret_key"
-  },
-  "functions": {
-    "api/index.py": {
-      "maxDuration": 10
-    }
   }
 }
