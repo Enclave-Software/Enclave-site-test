@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enclave Messenger - Login</title>
+    <link rel="stylesheet" href="/static/messenger-style.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="logo">
+                    <h1>🔒 Enclave Messenger</h1>
+                    <p>Secure • Private • Encrypted</p>
+                </div>
+            </div>
+
+            <div class="login-form">
+                <h2>Welcome Back</h2>
+                <p>Enter your details to start secure messaging</p>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" id="username" class="form-control" placeholder="Enter your username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="displayName" class="form-label">Display Name</label>
+                        <input type="text" id="displayName" class="form-control" placeholder="Your display name">
+                    </div>
+
+                    <button type="submit" class="btn btn--primary btn--full-width">
+                        🚀 Enter Messenger
+                    </button>
+                </form>
+
+                <div class="login-features">
+                    <h4>🔐 Security Features</h4>
+                    <ul>
+                        <li>End-to-end encryption</li>
+                        <li>No data collection</li>
+                        <li>Open source & auditable</li>
+                        <li>Privacy-first design</li>
+                    </ul>
+                </div>
+
+                <div class="vercel-info">
+                    <p><small>ℹ️ This is a demo version hosted on Vercel. For full features including real-time WebSocket communication, download the desktop application.</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const displayName = document.getElementById('displayName').value.trim() || username;
+
+            if (!username) {
+                alert('Please enter a username');
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, display_name: displayName })
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    window.location.href = '/';
+                } else {
+                    alert(result.message || 'Login failed');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                alert('Login failed. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

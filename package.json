@@ -1,0 +1,25 @@
+{
+  "name": "enclave-messenger-vercel",
+  "version": "1.0.0",
+  "description": "Secure messaging application deployed on Vercel",
+  "main": "api/index.py",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required for Python'",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "messaging",
+    "encryption",
+    "privacy",
+    "secure-chat",
+    "vercel",
+    "flask"
+  ],
+  "author": "Enclave Messenger Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/enclave-messenger"
+  }
+}

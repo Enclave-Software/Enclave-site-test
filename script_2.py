@@ -1,0 +1,41 @@
+# Create vercel.json configuration
+vercel_config = '''{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "static/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/index.py"
+    }
+  ],
+  "env": {
+    "SECRET_KEY": "@secret_key"
+  },
+  "functions": {
+    "api/index.py": {
+      "maxDuration": 10
+    }
+  }
+}'''
+
+with open('vercel.json', 'w') as f:
+    f.write(vercel_config)
+
+print("✅ Created Vercel configuration: vercel.json")
